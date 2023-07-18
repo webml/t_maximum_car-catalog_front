@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  padding: 4px;
+  width: fit-content;
+}
+
+.mark {
+  color: blue;
+  cursor: pointer;
+  margin-right: 4px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.mark:hover {
+  font-weight: 600;
+}
+
+.mark_active {
+  font-weight: 600;
+}
+
+.carsCount {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  color: #8c8c8c;
+}

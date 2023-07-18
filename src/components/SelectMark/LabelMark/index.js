@@ -1,0 +1,1 @@
+export { LabelMark } from "./LabelMark";

@@ -1,23 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { Layout, theme } from "antd";
+import { Content } from "antd/es/layout/layout";
+import { TableCars } from "./components/TableCars";
+import { SelectModel } from "./components/SelectModel";
+import { SelectMark } from "./components/SelectMark/";
+
+import { useGetCarsQuery } from "./redux";
 
 function App() {
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+
+  const [mark, setMark] = useState("Audi");
+  const [models, setModels] = useState([]);
+  const { data = [], isLoading } = useGetCarsQuery(mark);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <Layout
+        style={{
+          minHeight: "100vh",
+          background: colorBgContainer,
+        }}
+      >
+        <Content
+          style={{
+            margin: "16px",
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          <SelectMark setState={setMark} active={mark} />
+          {!isLoading && (
+            <div>
+              <SelectModel data={data} setState={setModels} />
+              <TableCars data={data} models={models} />
+            </div>
+          )}
+        </Content>
+      </Layout>
     </div>
   );
 }
